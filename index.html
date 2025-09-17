@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Apresentação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-white dark:bg-gray-800 shadow-md fixed top-0 w-full z-10">
+    <nav class="max-w-5xl mx-auto flex justify-between items-center p-4">
+      <h1 class="text-xl font-bold">Diogo Santos</h1>
+      <ul class="flex gap-6">
+        <li><a href="#sobre" class="hover:text-blue-600 dark:hover:text-blue-400">Sobre Mim</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="pt-32 pb-20 text-center bg-gradient-to-b from-blue-100 to-gray-100 dark:from-gray-800 dark:to-gray-900" data-aos="fade-down">
+    <img src="https://img.freepik.com/free-vector/hacker-operating-laptop-cartoon-icon-illustration-technology-icon-concept-isolated-flat-cartoon-style_138676-2387.jpg?semt=ais_incoming&w=740&q=80" alt="Foto de perfil" class="w-40 h-40 mx-auto rounded-full shadow-lg mb-6" data-aos="zoom-in" data-aos-delay="200">
+    <h2 class="text-4xl font-bold mb-2" data-aos="fade-up" data-aos-delay="300">Diogo Santos</h2>
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6" data-aos="fade-up" data-aos-delay="500">Software Developer</p>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="max-w-5xl mx-auto py-16 px-6" data-aos="zoom-in" data-aos-delay="600">
+    <h3 class="text-2xl font-bold mb-6 text-center"  data-aos="zoom-in" data-aos-delay="700">Sobre Mim</h3>
+    <p id="sobreTexto" class="text-gray-700 dark:text-gray-300 leading-relaxed text-center max-w-3xl mx-auto"  data-aos="zoom-in" data-aos-delay="800">
+        Olá! Sou o Diogo, tenho 19 anos e moro na Lourinhã. 
+        Desde pequeno tenho interesse por tecnologia e adoro aprender coisas novas.
+        No ensino secundário fiz um curso profissional que me deu o nivel 4 na área de ciências informáticas, a partir dessa altura comecei a adorar esta área. 
+        Gosto de criar soluções que facilitam a vida das pessoas e me desafio constantemente a evoluir como programador.
+        Entrei no CET de programação no citeforma á procura de aprofundar os meus conhecimentos, adquirir novas competências e com o objétivo de entrar no mercado de trabalho. 
+        No tempo livre, gosto de ouvir música, assistir séries ou filmes, e passar tempo com os amigos.
+        Acredito que colaboração e criatividade são essenciais para crescer nesta área. Estou sempre aberto a novas ideias e projetos!
+    </p>
+    <div class="text-center mt-6" data-aos="fade-up" data-aos-delay="1000">
+      <button id="falarBtn" class="bg-blue-500 text-white px-6 py-2 rounded-full shadow hover:bg-blue-600 active:bg-blue-700 transition">
+        🔊 Ouvir
+      </button>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-gray-800 dark:bg-gray-800 text-white py-6 text-center">
+    <p>© 2025 Diogo Santos & ChatGPT - Todos os direitos reservados</p>
+  </footer>
+
+  <!-- Inicializar AOS e funcionalidades -->
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false
+    });
+
+    const falarBtn = document.getElementById("falarBtn");
+    const sobreTexto = document.getElementById("sobreTexto").innerText;
+    let synth = window.speechSynthesis;
+    let utterance;
+
+    falarBtn.addEventListener("click", () => {
+        if (synth.speaking) {
+        synth.cancel();
+        falarBtn.textContent = "🔊 Ouvir";
+        return;
+        }
+
+        utterance = new SpeechSynthesisUtterance(sobreTexto);
+        utterance.lang = "pt-PT";
+        synth.speak(utterance);
+
+        falarBtn.textContent = "⏹ Parar";
+
+        utterance.onend = () => {
+        falarBtn.textContent = "🔊 Ouvir";
+        };
+    });
+  </script>
+</body>
+</html>
